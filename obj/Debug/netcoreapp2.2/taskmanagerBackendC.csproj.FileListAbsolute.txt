@@ -1,0 +1,14 @@
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/bin/Debug/netcoreapp2.2/taskmanagerBackendC.deps.json
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/bin/Debug/netcoreapp2.2/taskmanagerBackendC.runtimeconfig.json
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/bin/Debug/netcoreapp2.2/taskmanagerBackendC.runtimeconfig.dev.json
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/bin/Debug/netcoreapp2.2/taskmanagerBackendC.dll
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/bin/Debug/netcoreapp2.2/taskmanagerBackendC.pdb
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.csprojAssemblyReference.cache
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.csproj.CoreCompileInputs.cache
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.RazorAssemblyInfo.cache
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.RazorAssemblyInfo.cs
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.AssemblyInfoInputs.cache
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.AssemblyInfo.cs
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.RazorTargetAssemblyInfo.cache
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.dll
+/Users/sergejvukovic/programming/projects/taskmanagerBackendC/taskmanagerBackendC/obj/Debug/netcoreapp2.2/taskmanagerBackendC.pdb
