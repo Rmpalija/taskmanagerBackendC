@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using taskmanagerBackendC.Models;
 namespace taskmanagerBackendC.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class TasksController : ControllerBase
     {
@@ -24,7 +27,16 @@ namespace taskmanagerBackendC.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tasks>>> GetTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            var userId = Convert.ToInt16(User.FindFirst("sub")?.Value);
+
+            var result = await _context.Tasks
+                .Include(u => u.LabelsTasks)
+                .ThenInclude(s => s.Labels)
+                .Where(x => x.UserId == userId)
+                .Where(t => t.Status == "working")
+                .ToListAsync();
+
+            return Ok(result);
         }
 
         // GET: api/Tasks/5
@@ -50,10 +62,10 @@ namespace taskmanagerBackendC.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(tasks).State = EntityState.Modified;
-
             try
             {
+                var task = await _context.Tasks.Where(x => x.Id == tasks.Id).FirstAsync();
+                task.Status = tasks.Status;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -75,6 +87,9 @@ namespace taskmanagerBackendC.Controllers
         [HttpPost]
         public async Task<ActionResult<Tasks>> PostTasks(Tasks tasks)
         {
+
+            var userId = Convert.ToInt16(User.FindFirst("sub")?.Value);
+            tasks.UserId = userId;
             _context.Tasks.Add(tasks);
             await _context.SaveChangesAsync();
 
@@ -95,6 +110,45 @@ namespace taskmanagerBackendC.Controllers
             await _context.SaveChangesAsync();
 
             return tasks;
+        }
+
+        [HttpPut]
+        [Route("addtogroup")]
+        public async Task<ActionResult<GroupsTasks>> AddTaskToGroup([FromBody] GroupsTasks model)
+        {
+            var groupTask = new GroupsTasks
+            {
+                TasksId = model.TasksId,
+                GroupsId = model.GroupsId
+            };
+            await _context.GroupsTasks.AddAsync(groupTask);
+            var result = await _context.SaveChangesAsync();
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("removefromgroup")]
+        public async Task<ActionResult<GroupsTasks>> RemoveTaskFromGroup([FromBody] GroupsTasks model)
+        {
+
+            var labelTask = new GroupsTasks
+            {
+                TasksId = model.TasksId,
+                GroupsId = model.GroupsId
+            };
+
+            var connection = await _context.GroupsTasks.Where(x => x.TasksId == labelTask.TasksId && x.GroupsId == labelTask.GroupsId).FirstAsync();
+            _context.GroupsTasks.Remove(connection);
+            var result = _context.SaveChangesAsync();
+
+            if (result.Result == 1)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+
         }
 
         private bool TasksExists(int id)

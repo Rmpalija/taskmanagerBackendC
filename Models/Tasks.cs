@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace taskmanagerBackendC.Models
 {
-    public partial class Tasks
+    public class Tasks
     {
         public Tasks()
         {

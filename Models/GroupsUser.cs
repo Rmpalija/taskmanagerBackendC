@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace taskmanagerBackendC.Models
 {
-    public partial class GroupsUser
+    public class GroupsUser
     {
         public int Id { get; set; }
         public int GroupsId { get; set; }
